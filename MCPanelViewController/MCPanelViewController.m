@@ -1,0 +1,340 @@
+//
+//  MCPanelViewController.m
+//  GSX
+//
+//  Created by Matthew Cheok on 2/10/13.
+//  Copyright (c) 2013 Matthew Cheok. All rights reserved.
+//
+
+#import "MCPanelViewController.h"
+#import "MCPanGestureRecognizer.h"
+
+#import "UIImage+ImageEffects.h"
+
+#import <objc/runtime.h>
+
+const static CGFloat MCPanelViewAnimationDuration = 0.3;
+const static CGFloat MCPanelViewGestureThreshold = 0.6;
+
+const static NSString *MCPanelViewGestureViewControllerKey = @"MCPanelViewGestureViewControllerKey";
+const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGestureAnimationDirectionKey";
+
+@interface UIViewController (MCPanelViewController)
+
+- (void)addToParentViewController:(UIViewController *)parentViewController inView:(UIView *)view callingAppearanceMethods:(BOOL)callAppearanceMethods;
+- (void)removeFromParentViewControllerCallingAppearanceMethods:(BOOL)callAppearanceMethods;
+
+@end
+
+@implementation UIViewController (MCPanelViewController)
+
+- (void)addToParentViewController:(UIViewController *)parentViewController inView:(UIView *)view callingAppearanceMethods:(BOOL)callAppearanceMethods
+{
+    if (self.parentViewController != nil) {
+        [self removeFromParentViewControllerCallingAppearanceMethods:callAppearanceMethods];
+    }
+
+    if (callAppearanceMethods)
+        [self beginAppearanceTransition:YES animated:NO];
+    [parentViewController addChildViewController:self];
+    [view addSubview:self.view];
+    [self didMoveToParentViewController:self];
+    if (callAppearanceMethods)
+        [self endAppearanceTransition];
+}
+
+- (void)removeFromParentViewControllerCallingAppearanceMethods:(BOOL)callAppearanceMethods
+{
+    if (callAppearanceMethods)
+        [self beginAppearanceTransition:NO animated:NO];
+    [self willMoveToParentViewController:nil];
+    [self.view removeFromSuperview];
+    [self removeFromParentViewController];
+    if (callAppearanceMethods)
+        [self endAppearanceTransition];
+}
+
+@end
+
+@interface MCPanelViewController () <UIGestureRecognizerDelegate>
+
+@property (assign, nonatomic) MCPanelAnimationDirection direction;
+@property (assign, nonatomic) CGFloat maxWidth;
+@property (assign, nonatomic) CGFloat maxHeight;
+
+@property (strong, nonatomic) UIButton *backgroundButton;
+@property (strong, nonatomic) MCPanGestureRecognizer *panGestureRecognizer;
+
+@property (strong, nonatomic) UIView *shadowView;
+@property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic, readwrite) UIViewController *rootViewController;
+
+@end
+
+@implementation MCPanelViewController
+
+- (id)initWithRootViewController:(UIViewController *)controller
+{
+    self = [super init];
+    if (self) {
+        self.tintColor = [UIColor colorWithWhite:1.0 alpha:0.3];
+        self.rootViewController = controller;
+        if ([controller isKindOfClass:[UINavigationController class]]) {
+            UINavigationController *navController = (UINavigationController *) controller;
+            navController.topViewController.view.backgroundColor = [UIColor clearColor];
+        }
+        else {
+            controller.view.backgroundColor = [UIColor clearColor];
+        }
+
+        self.panGestureRecognizer = [[MCPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        self.panGestureRecognizer.direction = MCPanGestureRecognizerDirectionHorizontal;
+        [self.rootViewController.view addGestureRecognizer:self.panGestureRecognizer];
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void)commonInit {
+    self.backgroundButton = [[UIButton alloc] init];
+    [self.backgroundButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+    self.masking = YES;    
+
+    [self.view addSubview:self.backgroundButton];
+
+    self.shadowView = [[UIView alloc] init];
+    self.shadowView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.shadowView.layer.shadowOpacity = 0.3;
+    self.shadowView.layer.shadowRadius = 5;
+    self.shadowView.layer.shadowOffset = CGSizeZero;
+
+    self.imageView = [[UIImageView alloc] init];
+    self.imageView.contentMode = UIViewContentModeLeft;
+    self.imageView.clipsToBounds = YES;
+
+    [self.view addSubview:self.shadowView];
+    [self.view addSubview:self.imageView];
+}
+
+- (void)setMasking:(BOOL)masking {
+    _masking = masking;
+    if (masking) {
+        self.backgroundButton.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+    }
+    else {
+        self.backgroundButton.backgroundColor = [UIColor clearColor];
+    }
+}
+
+- (void)layoutSubviewsToWidth:(CGFloat)width {
+    CGRect bounds = self.parentViewController.view.bounds;
+    if (width > self.maxWidth) {
+        CGFloat offset = 0;
+        CGFloat shadowOffset = width - self.maxWidth;
+
+        if (self.direction == MCPanelAnimationDirectionLeft) {
+        }
+        else {
+            offset = CGRectGetWidth(bounds)-width;
+            shadowOffset = offset;
+        }
+
+        self.backgroundButton.alpha = 1;
+        self.imageView.frame = CGRectMake(offset, 0, width, self.maxHeight);
+        self.shadowView.frame = CGRectMake(shadowOffset, 0, width, self.maxHeight);
+        self.rootViewController.view.frame = CGRectMake(offset, 0, width, self.maxHeight);
+    }
+    else {
+        CGFloat offset = 0;
+        CGRect frame = CGRectZero;
+        if (self.direction == MCPanelAnimationDirectionLeft) {
+            frame = CGRectMake(width-self.maxWidth, 0, self.maxWidth, self.maxHeight);
+        }
+        else {
+            offset = CGRectGetWidth(bounds)-width;
+            frame = CGRectMake(CGRectGetWidth(bounds)-width, 0, self.maxWidth, self.maxHeight);
+        }
+
+        self.backgroundButton.alpha = width / self.maxWidth;
+        self.imageView.frame = CGRectMake(offset, 0, width, self.maxHeight);
+        self.shadowView.frame = frame;
+        self.rootViewController.view.frame = frame;
+    }
+}
+
+- (void)setupController:(UIViewController *)controller withDirection:(MCPanelAnimationDirection)direction {
+    self.direction = direction;
+
+    CGRect bounds = controller.view.bounds;
+    self.maxHeight = CGRectGetHeight(bounds);
+    self.maxWidth = self.rootViewController.preferredContentSize.width;
+    if (self.maxWidth == 0) {
+        self.maxWidth = 320;
+    }
+
+    [self.rootViewController addToParentViewController:self inView:self.view callingAppearanceMethods:YES];
+
+    self.view.frame = bounds;
+    self.backgroundButton.frame = bounds;
+    [self addToParentViewController:controller inView:controller.view callingAppearanceMethods:YES];
+
+    [self refreshBackground];
+    self.shadowView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.maxWidth, self.maxHeight)].CGPath;
+    self.imageView.contentMode = direction;
+}
+
+- (void)presentInViewController:(UIViewController *)controller withDirection:(MCPanelAnimationDirection)direction {
+    [self setupController:controller withDirection:direction];
+    [self layoutSubviewsToWidth:0];
+
+    __weak typeof(self) weakSelf = self;
+    [UIView animateWithDuration:MCPanelViewAnimationDuration delay:0 options:0 animations:^{
+        typeof(self) strongSelf = weakSelf;
+        [strongSelf layoutSubviewsToWidth:strongSelf.maxWidth];
+    } completion:^(BOOL finished) {
+    }];
+}
+
+- (void)dismiss {
+    CGRect bounds = self.parentViewController.view.bounds;
+
+    CGFloat currentWidth = CGRectGetMinX(self.rootViewController.view.frame);
+    if (self.direction == MCPanelAnimationDirectionLeft) {
+        currentWidth += self.maxWidth;
+    }
+    else {
+        currentWidth = CGRectGetWidth(bounds) - currentWidth;
+    }
+    CGFloat ratio = currentWidth / self.maxWidth;
+
+    __weak typeof(self) weakSelf = self;
+    [UIView animateWithDuration:MCPanelViewAnimationDuration*ratio delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        typeof(self) strongSelf = weakSelf;
+        [strongSelf layoutSubviewsToWidth:0];
+    } completion:^(BOOL finished) {
+        typeof(self) strongSelf = weakSelf;
+        [self.rootViewController removeFromParentViewControllerCallingAppearanceMethods:YES];
+        [strongSelf removeFromParentViewControllerCallingAppearanceMethods:YES];
+    }];
+}
+
+- (void)refreshBackground {
+    UIView *view = self.parentViewController.view;
+
+    // get snapshot image
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0.0);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:NO];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    switch (self.backgroundStyle) {
+        case MCPanelBackgroundStyleExtraLight:
+            image = [image applyExtraLightEffect];
+            break;
+
+        case MCPanelBackgroundStyleDark:
+            image = [image applyDarkEffect];
+            break;
+
+        case MCPanelBackgroundStyleTinted:
+            image = [image applyTintEffectWithColor:self.tintColor];
+            break;
+
+        default:
+            image = [image applyLightEffect];
+            break;
+    }
+
+    self.imageView.image = image;
+}
+
+#pragma mark - Gestures
+
+- (void)handlePan:(UIPanGestureRecognizer *)pan {
+    // initialization for screen edge pan gesture
+    if ([pan isKindOfClass:[UIScreenEdgePanGestureRecognizer class]] &&
+        pan.state == UIGestureRecognizerStateBegan) {
+        __weak UIViewController *controller = objc_getAssociatedObject(pan, &MCPanelViewGestureViewControllerKey);
+        
+        if (!controller) {
+            return;
+        }
+
+        MCPanelAnimationDirection direction = [objc_getAssociatedObject(pan, &MCPanelViewGestureAnimationDirectionKey) integerValue];
+        [self setupController:controller withDirection:direction];
+
+        CGPoint translation = [pan translationInView:pan.view];
+        CGFloat width = direction == MCPanelAnimationDirectionLeft ? translation.x : -1 * translation.x;
+
+        [self layoutSubviewsToWidth:0];
+        __weak typeof(self) weakSelf = self;
+        [UIView animateWithDuration:MCPanelViewAnimationDuration delay:0 options:0 animations:^{
+            typeof(self) strongSelf = weakSelf;
+            [strongSelf layoutSubviewsToWidth:width];
+        } completion:^(BOOL finished) {
+        }];
+
+        CGFloat offset = self.maxWidth - width;
+        if (direction == MCPanelAnimationDirectionLeft) {
+            offset *= -1;
+        }
+        [pan setTranslation:CGPointMake(offset, translation.y) inView:pan.view];
+    }
+
+    if (!self.parentViewController) {
+        return;
+    }
+
+    CGFloat newWidth = [pan translationInView:pan.view].x;
+    if (self.direction == MCPanelAnimationDirectionRight) {
+        newWidth *= -1;
+    }
+    newWidth += self.maxWidth;
+    CGFloat ratio = newWidth / self.maxWidth;
+
+    switch (pan.state) {
+        case UIGestureRecognizerStateBegan:
+        case UIGestureRecognizerStateChanged: {
+            [self layoutSubviewsToWidth:newWidth];
+            break;
+        }
+
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled: {
+            CGFloat threshold = MCPanelViewGestureThreshold;
+
+            // invert threshold if we started a screen edge pan gesture
+            if ([pan isKindOfClass:[UIScreenEdgePanGestureRecognizer class]]) {
+                threshold = 1 - threshold;
+            }
+
+            if (ratio < threshold) {
+                [self dismiss];
+            }
+            else {
+                __weak typeof(self) weakSelf = self;
+                [UIView animateWithDuration:MCPanelViewAnimationDuration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                    typeof(self) strongSelf = weakSelf;
+                    [strongSelf layoutSubviewsToWidth:strongSelf.maxWidth];
+                } completion:^(BOOL finished) {
+                }];
+            }
+            break;
+        }
+            
+        default:
+            break;
+    }
+}
+
+- (UIScreenEdgePanGestureRecognizer *)gestureRecognizerForScreenEdgeGestureInViewController:(UIViewController *)controller withDirection:(MCPanelAnimationDirection)direction {
+    UIScreenEdgePanGestureRecognizer *pan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    pan.edges = direction == MCPanelAnimationDirectionLeft ? UIRectEdgeLeft : UIRectEdgeRight;
+
+    objc_setAssociatedObject(pan, &MCPanelViewGestureViewControllerKey, controller, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(pan, &MCPanelViewGestureAnimationDirectionKey, @(direction), OBJC_ASSOCIATION_RETAIN);
+
+    return pan;
+}
+
+@end
