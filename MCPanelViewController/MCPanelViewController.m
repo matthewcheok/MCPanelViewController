@@ -19,21 +19,21 @@ const static CGFloat MCPanelViewGestureThreshold = 0.6;
 const static NSString *MCPanelViewGestureViewControllerKey = @"MCPanelViewGestureViewControllerKey";
 const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGestureAnimationDirectionKey";
 
-@interface UIViewController (MCPanelViewController)
+@interface UIViewController (MCPanelViewControllerInternal)
 
 - (void)addToParentViewController:(UIViewController *)parentViewController inView:(UIView *)view callingAppearanceMethods:(BOOL)callAppearanceMethods;
 - (void)removeFromParentViewControllerCallingAppearanceMethods:(BOOL)callAppearanceMethods;
 
 @end
 
-@implementation UIViewController (MCPanelViewController)
+@implementation UIViewController (MCPanelViewControllerInternal)
 
 - (void)addToParentViewController:(UIViewController *)parentViewController inView:(UIView *)view callingAppearanceMethods:(BOOL)callAppearanceMethods
 {
     if (self.parentViewController != nil) {
         [self removeFromParentViewControllerCallingAppearanceMethods:callAppearanceMethods];
     }
-
+    
     if (callAppearanceMethods)
         [self beginAppearanceTransition:YES animated:NO];
     [parentViewController addChildViewController:self];
@@ -56,6 +56,7 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
 
 @end
 
+
 @interface MCPanelViewController () <UIGestureRecognizerDelegate>
 
 @property (assign, nonatomic) MCPanelAnimationDirection direction;
@@ -70,6 +71,7 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
 @property (strong, nonatomic, readwrite) UIViewController *rootViewController;
 
 @end
+
 
 @implementation MCPanelViewController
 
@@ -96,7 +98,11 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
 }
 
 - (void)commonInit {
+    UIViewAutoresizing fullScreenMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.view.autoresizingMask = fullScreenMask;
+    
     self.backgroundButton = [[UIButton alloc] init];
+    self.backgroundButton.autoresizingMask = fullScreenMask;
     [self.backgroundButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     self.masking = YES;    
 
@@ -111,7 +117,7 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
     self.imageView = [[UIImageView alloc] init];
     self.imageView.contentMode = UIViewContentModeLeft;
     self.imageView.clipsToBounds = YES;
-
+    
     [self.view addSubview:self.shadowView];
     [self.view addSubview:self.imageView];
 }
@@ -176,11 +182,30 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
 
     self.view.frame = bounds;
     self.backgroundButton.frame = bounds;
+    
+    // support rotation
+    UIViewAutoresizing mask = UIViewAutoresizingFlexibleHeight;
+    switch (direction) {
+        case MCPanelAnimationDirectionLeft:
+            mask |= UIViewAutoresizingFlexibleRightMargin;
+            break;
+        
+        case MCPanelAnimationDirectionRight:
+            mask |= UIViewAutoresizingFlexibleLeftMargin;
+            break;
+            
+        default:
+            break;
+    }
+    
+    self.rootViewController.view.autoresizingMask = mask;
+    self.imageView.autoresizingMask = mask;
+    self.shadowView.autoresizingMask = mask;
     [self addToParentViewController:controller inView:controller.view callingAppearanceMethods:YES];
 
-    [self refreshBackground];
-    self.shadowView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.maxWidth, self.maxHeight)].CGPath;
+    [self refreshBackgroundAnimated:NO];
     self.imageView.contentMode = direction;
+    self.shadowView.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.maxWidth, self.maxHeight)].CGPath;
 }
 
 - (void)presentInViewController:(UIViewController *)controller withDirection:(MCPanelAnimationDirection)direction {
@@ -218,12 +243,41 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
     }];
 }
 
-- (void)refreshBackground {
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    CGRect bounds = self.parentViewController.view.bounds;
+    self.maxHeight = CGRectGetHeight(bounds);
+    
+    [self refreshBackgroundAnimated:YES];
+}
+
+- (void)refreshBackgroundAnimated:(BOOL)animated {
     UIView *view = self.parentViewController.view;
+    
+    BOOL wasViewAttached = (self.view.superview != nil);
+    if (wasViewAttached) {
+        [self.view removeFromSuperview];
+    }
+    
+    // extend background image height to the longer of the dimensions
+    // so that when rotating the background is seamless
+    CGFloat width = CGRectGetWidth(view.bounds);
+    CGFloat height = CGRectGetHeight(view.bounds);
+    CGFloat dimension = MAX(width, height);
+    CGRect rect = CGRectMake(0, 0, width, dimension);
 
     // get snapshot image
-    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0.0);
-    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:NO];
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    
+    // try to extend image by reflecting
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextTranslateCTM(ctx, 0, 2*height);
+    CGContextScaleCTM(ctx, 1, -1);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
 
@@ -244,8 +298,24 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
             image = [image applyLightEffect];
             break;
     }
+    
+    if (wasViewAttached) {
+        [view addSubview:self.view];
+    }
 
-    self.imageView.image = image;
+    if (animated) {
+        __weak typeof(self) weakSelf = self;
+        [UIView transitionWithView:self.imageView
+                          duration:MCPanelViewAnimationDuration
+                           options:UIViewAnimationOptionTransitionCrossDissolve|UIViewAnimationOptionAllowUserInteraction
+                        animations:^{
+                            typeof(self) strongSelf = weakSelf;
+                            strongSelf.imageView.image = image;
+                        } completion:nil];
+    }
+    else {
+        self.imageView.image = image;
+    }
 }
 
 #pragma mark - Gestures
@@ -335,6 +405,18 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
     objc_setAssociatedObject(pan, &MCPanelViewGestureAnimationDirectionKey, @(direction), OBJC_ASSOCIATION_RETAIN);
 
     return pan;
+}
+
+@end
+
+@implementation UIViewController (MCPanelViewController)
+
+- (MCPanelViewController *)viewControllerInPanelViewController {
+    return [[MCPanelViewController alloc] initWithRootViewController:self];
+}
+
+- (void)presentPanelViewController:(MCPanelViewController *)controller withDirection:(MCPanelAnimationDirection)direction {
+    [controller presentInViewController:self withDirection:direction];
 }
 
 @end

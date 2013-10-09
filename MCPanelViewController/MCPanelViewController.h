@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger, MCPanelAnimationDirection) {
-    MCPanelAnimationDirectionLeft = UIViewContentModeLeft,
-    MCPanelAnimationDirectionRight = UIViewContentModeRight
+    MCPanelAnimationDirectionLeft = UIViewContentModeTopLeft,
+    MCPanelAnimationDirectionRight = UIViewContentModeTopRight
 };
 
 typedef NS_ENUM(NSInteger, MCPanelBackgroundStyle) {
@@ -32,5 +32,12 @@ typedef NS_ENUM(NSInteger, MCPanelBackgroundStyle) {
 - (void)dismiss;
 
 - (UIScreenEdgePanGestureRecognizer *)gestureRecognizerForScreenEdgeGestureInViewController:(UIViewController *)controller withDirection:(MCPanelAnimationDirection)direction;
+
+@end
+
+@interface UIViewController (MCPanelViewController)
+
+- (MCPanelViewController *)viewControllerInPanelViewController;
+- (void)presentPanelViewController:(MCPanelViewController *)controller withDirection:(MCPanelAnimationDirection)direction;
 
 @end

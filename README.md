@@ -9,12 +9,16 @@ Drop-in panel control for iOS with blurring background and screen-edge activatio
 
 ## Using MCPanelViewController
 
-Instantiate `MCPanelViewController` like this:
+First, setup your view controller to display within the panel view controller, then instantiate `MCPanelViewController` like this:
 
     UIViewController *controller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LightPanelViewControllerInNavigationController"];
     controller.preferredContentSize = CGSizeMake(440, 0);
 
     MCPanelViewController *panelController = [[MCPanelViewController alloc] initWithRootViewController:controller];
+
+or using the convenience method on `UIViewController`:
+
+    MCPanelViewController *panelController = [controller viewControllerInPanelViewController];
 
 Adjust `preferredContentSize` to set the desired width of the panel. The height is ignored.
 
@@ -30,9 +34,13 @@ To open the panel programatically, such as from a button:
 
     [panelController presentInViewController:self.navigationController withDirection:MCPanelAnimationDirectionRight];
 
-You may also use `MCPanelAnimationDirectionLeft`. Present the controller in a full screen controller, such as the top-level navigation controller.
+or using the convenience method on `UIViewController`:
 
-To configure a screen-edge gesture:
+	[self.navigationController presentPanelViewController:panelController withDirection:MCPanelAnimationDirectionRight];
+
+You may also use `MCPanelAnimationDirectionLeft`. Present the controller in a full-screen view controller, such as a top-level navigation controller.
+
+To configure a screen-edge gesture and add it to your top-level view controller:
 
     [self.navigationController.view addGestureRecognizer:[panelController gestureRecognizerForScreenEdgeGestureInViewController:self.navigationController withDirection:MCPanelAnimationDirectionRight]];
 

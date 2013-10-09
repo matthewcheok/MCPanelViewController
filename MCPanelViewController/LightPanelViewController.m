@@ -43,7 +43,7 @@
 #pragma mark - Table view data source
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    cell.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
+    cell.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
 }
 
 @end

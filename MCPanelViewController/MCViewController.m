@@ -19,11 +19,11 @@
 }
 
 - (IBAction)leftButton:(id)sender {
-    [_lightPanelViewController presentInViewController:self.navigationController withDirection:MCPanelAnimationDirectionLeft];
+    [self.navigationController presentPanelViewController:_lightPanelViewController withDirection:MCPanelAnimationDirectionLeft];
 }
 
 - (IBAction)rightButton:(id)sender {
-    [_tintedPanelViewController presentInViewController:self.navigationController withDirection:MCPanelAnimationDirectionRight];
+    [self.navigationController presentPanelViewController:_tintedPanelViewController withDirection:MCPanelAnimationDirectionRight];
 }
 
 - (void)viewDidLoad
@@ -32,14 +32,13 @@
 	// Do any additional setup after loading the view, typically from a nib.
 
     UIViewController *controller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"LightPanelViewControllerInNavigationController"];
-    controller.preferredContentSize = CGSizeMake(440, 0);
-    _lightPanelViewController = [[MCPanelViewController alloc] initWithRootViewController:controller];
+    controller.preferredContentSize = CGSizeMake(420, 0);
+    _lightPanelViewController = [controller viewControllerInPanelViewController];
 
     [self.navigationController.view addGestureRecognizer:[_lightPanelViewController gestureRecognizerForScreenEdgeGestureInViewController:self.navigationController withDirection:MCPanelAnimationDirectionLeft]];
 
     controller = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"TintedPanelViewController"];
-    _tintedPanelViewController = [[MCPanelViewController alloc] initWithRootViewController:controller];
-    _tintedPanelViewController.masking = NO;
+    _tintedPanelViewController = [controller viewControllerInPanelViewController];
     _tintedPanelViewController.backgroundStyle = MCPanelBackgroundStyleTinted;
     _tintedPanelViewController.tintColor = [UIColor colorWithRed:0.7 green:0.7 blue:1 alpha:1];
 
