@@ -89,9 +89,6 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
             controller.view.backgroundColor = [UIColor clearColor];
         }
 
-        self.panGestureRecognizer = [[MCPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        self.panGestureRecognizer.direction = MCPanGestureRecognizerDirectionHorizontal;
-        [self.rootViewController.view addGestureRecognizer:self.panGestureRecognizer];
         [self commonInit];
     }
     return self;
@@ -120,6 +117,8 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
     
     [self.view addSubview:self.shadowView];
     [self.view addSubview:self.imageView];
+  
+    [self setPanGesturesEnabled:YES];
 }
 
 - (void)setMasking:(BOOL)masking {
@@ -130,6 +129,22 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
     else {
         self.backgroundButton.backgroundColor = [UIColor clearColor];
     }
+}
+
+- (void)setPanGesturesEnabled:(BOOL)panGesturesEnabled {  
+  if( panGesturesEnabled == _panGesturesEnabled )
+    return;
+  
+  _panGesturesEnabled = panGesturesEnabled;
+  
+  if( _panGesturesEnabled && !self.panGestureRecognizer ) {
+    self.panGestureRecognizer = [[MCPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    self.panGestureRecognizer.direction = MCPanGestureRecognizerDirectionHorizontal;
+    [self.rootViewController.view addGestureRecognizer:self.panGestureRecognizer];
+  } else if( !_panGesturesEnabled && self.panGestureRecognizer ) {
+    [self.rootViewController.view removeGestureRecognizer:self.panGestureRecognizer];
+    self.panGestureRecognizer = nil;
+  }
 }
 
 - (void)layoutSubviewsToWidth:(CGFloat)width {

@@ -26,6 +26,7 @@ typedef NS_ENUM(NSInteger, MCPanelBackgroundStyle) {
 @property (strong, nonatomic) UIColor *tintColor;
 @property (assign, nonatomic) MCPanelBackgroundStyle backgroundStyle;
 @property (assign, nonatomic, getter = isMasking) BOOL masking;
+@property (nonatomic, assign) BOOL panGesturesEnabled;
 
 - (id)initWithRootViewController:(UIViewController *)controller;
 - (void)presentInViewController:(UIViewController *)controller withDirection:(MCPanelAnimationDirection)direction;
