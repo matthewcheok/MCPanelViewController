@@ -12,21 +12,21 @@
 		3419394E17FD359600DAA33C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3419394D17FD359600DAA33C /* UIKit.framework */; };
 		3419395417FD359600DAA33C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3419395217FD359600DAA33C /* InfoPlist.strings */; };
 		3419395617FD359600DAA33C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3419395517FD359600DAA33C /* main.m */; };
-		3419395A17FD359600DAA33C /* MCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3419395917FD359600DAA33C /* MCAppDelegate.m */; };
 		3419395D17FD359600DAA33C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3419395B17FD359600DAA33C /* Main.storyboard */; };
 		3419396017FD359600DAA33C /* MCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3419395F17FD359600DAA33C /* MCViewController.m */; };
-		3419396217FD359600DAA33C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3419396117FD359600DAA33C /* Images.xcassets */; };
 		3419396917FD359600DAA33C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3419396817FD359600DAA33C /* XCTest.framework */; };
 		3419396A17FD359600DAA33C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3419394917FD359600DAA33C /* Foundation.framework */; };
 		3419396B17FD359600DAA33C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3419394D17FD359600DAA33C /* UIKit.framework */; };
 		3419397317FD359600DAA33C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3419397117FD359600DAA33C /* InfoPlist.strings */; };
 		3419397517FD359600DAA33C /* MCPanelViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3419397417FD359600DAA33C /* MCPanelViewControllerTests.m */; };
-		3419398217FD35B300DAA33C /* MCPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3419397F17FD35B300DAA33C /* MCPanelViewController.m */; };
-		3419398317FD35B300DAA33C /* MCPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3419398117FD35B300DAA33C /* MCPanGestureRecognizer.m */; };
-		3419398617FD35CE00DAA33C /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 3419398517FD35CE00DAA33C /* UIImage+ImageEffects.m */; };
-		3419398917FD366000DAA33C /* CUBEN-12-Space-8-iPad3-SimonCPage@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3419398817FD366000DAA33C /* CUBEN-12-Space-8-iPad3-SimonCPage@2x.jpg */; };
-		3419398B17FD366800DAA33C /* CUBEN-12-Space-8-iPad3-SimonCPage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3419398A17FD366800DAA33C /* CUBEN-12-Space-8-iPad3-SimonCPage.jpg */; };
 		3419398F17FD3B1F00DAA33C /* LightPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3419398E17FD3B1F00DAA33C /* LightPanelViewController.m */; };
+		34A0D357180F995700B25BB0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34A0D356180F995700B25BB0 /* Images.xcassets */; };
+		34A0D35C180F995F00B25BB0 /* CUBEN-12-Space-8-iPad3-SimonCPage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 34A0D358180F995F00B25BB0 /* CUBEN-12-Space-8-iPad3-SimonCPage.jpg */; };
+		34A0D35D180F995F00B25BB0 /* CUBEN-12-Space-8-iPad3-SimonCPage@2x.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 34A0D359180F995F00B25BB0 /* CUBEN-12-Space-8-iPad3-SimonCPage@2x.jpg */; };
+		34A0D35E180F995F00B25BB0 /* MCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A0D35B180F995F00B25BB0 /* MCAppDelegate.m */; };
+		34A0D366180F9A4A00B25BB0 /* MCPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A0D361180F9A4A00B25BB0 /* MCPanelViewController.m */; };
+		34A0D367180F9A4A00B25BB0 /* MCPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A0D363180F9A4A00B25BB0 /* MCPanGestureRecognizer.m */; };
+		34A0D368180F9A4A00B25BB0 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A0D365180F9A4A00B25BB0 /* UIImage+ImageEffects.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,35 +40,35 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3419394617FD359600DAA33C /* MCPanelViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MCPanelViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3419394617FD359600DAA33C /* MCPanelViewControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MCPanelViewControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3419394917FD359600DAA33C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3419394B17FD359600DAA33C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3419394D17FD359600DAA33C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		3419395117FD359600DAA33C /* MCPanelViewController-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MCPanelViewController-Info.plist"; sourceTree = "<group>"; };
+		3419395117FD359600DAA33C /* MCPanelViewControllerDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MCPanelViewControllerDemo-Info.plist"; sourceTree = "<group>"; };
 		3419395317FD359600DAA33C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3419395517FD359600DAA33C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3419395717FD359600DAA33C /* MCPanelViewController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MCPanelViewController-Prefix.pch"; sourceTree = "<group>"; };
-		3419395817FD359600DAA33C /* MCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCAppDelegate.h; sourceTree = "<group>"; };
-		3419395917FD359600DAA33C /* MCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCAppDelegate.m; sourceTree = "<group>"; };
+		3419395717FD359600DAA33C /* MCPanelViewControllerDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MCPanelViewControllerDemo-Prefix.pch"; sourceTree = "<group>"; };
 		3419395C17FD359600DAA33C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3419395E17FD359600DAA33C /* MCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCViewController.h; sourceTree = "<group>"; };
 		3419395F17FD359600DAA33C /* MCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCViewController.m; sourceTree = "<group>"; };
-		3419396117FD359600DAA33C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		3419396717FD359600DAA33C /* MCPanelViewControllerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MCPanelViewControllerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3419396717FD359600DAA33C /* MCPanelViewControllerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MCPanelViewControllerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3419396817FD359600DAA33C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		3419397017FD359600DAA33C /* MCPanelViewControllerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MCPanelViewControllerTests-Info.plist"; sourceTree = "<group>"; };
+		3419397017FD359600DAA33C /* MCPanelViewControllerDemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MCPanelViewControllerDemoTests-Info.plist"; sourceTree = "<group>"; };
 		3419397217FD359600DAA33C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3419397417FD359600DAA33C /* MCPanelViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCPanelViewControllerTests.m; sourceTree = "<group>"; };
-		3419397E17FD35B300DAA33C /* MCPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPanelViewController.h; sourceTree = "<group>"; };
-		3419397F17FD35B300DAA33C /* MCPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPanelViewController.m; sourceTree = "<group>"; };
-		3419398017FD35B300DAA33C /* MCPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPanGestureRecognizer.h; sourceTree = "<group>"; };
-		3419398117FD35B300DAA33C /* MCPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPanGestureRecognizer.m; sourceTree = "<group>"; };
-		3419398417FD35CE00DAA33C /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
-		3419398517FD35CE00DAA33C /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		3419398817FD366000DAA33C /* CUBEN-12-Space-8-iPad3-SimonCPage@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "CUBEN-12-Space-8-iPad3-SimonCPage@2x.jpg"; sourceTree = "<group>"; };
-		3419398A17FD366800DAA33C /* CUBEN-12-Space-8-iPad3-SimonCPage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "CUBEN-12-Space-8-iPad3-SimonCPage.jpg"; sourceTree = "<group>"; };
 		3419398D17FD3B1F00DAA33C /* LightPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightPanelViewController.h; sourceTree = "<group>"; };
 		3419398E17FD3B1F00DAA33C /* LightPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightPanelViewController.m; sourceTree = "<group>"; };
+		34A0D356180F995700B25BB0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		34A0D358180F995F00B25BB0 /* CUBEN-12-Space-8-iPad3-SimonCPage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "CUBEN-12-Space-8-iPad3-SimonCPage.jpg"; sourceTree = "<group>"; };
+		34A0D359180F995F00B25BB0 /* CUBEN-12-Space-8-iPad3-SimonCPage@2x.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "CUBEN-12-Space-8-iPad3-SimonCPage@2x.jpg"; sourceTree = "<group>"; };
+		34A0D35A180F995F00B25BB0 /* MCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAppDelegate.h; sourceTree = "<group>"; };
+		34A0D35B180F995F00B25BB0 /* MCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAppDelegate.m; sourceTree = "<group>"; };
+		34A0D360180F9A4A00B25BB0 /* MCPanelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPanelViewController.h; sourceTree = "<group>"; };
+		34A0D361180F9A4A00B25BB0 /* MCPanelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPanelViewController.m; sourceTree = "<group>"; };
+		34A0D362180F9A4A00B25BB0 /* MCPanGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPanGestureRecognizer.h; sourceTree = "<group>"; };
+		34A0D363180F9A4A00B25BB0 /* MCPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPanGestureRecognizer.m; sourceTree = "<group>"; };
+		34A0D364180F9A4A00B25BB0 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		34A0D365180F9A4A00B25BB0 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +98,8 @@
 		3419393D17FD359600DAA33C = {
 			isa = PBXGroup;
 			children = (
-				3419394F17FD359600DAA33C /* MCPanelViewController */,
+				34A0D35F180F9A4A00B25BB0 /* MCPanelViewController */,
+				3419394F17FD359600DAA33C /* MCPanelViewControllerDemo */,
 				3419396E17FD359600DAA33C /* MCPanelViewControllerTests */,
 				3419394817FD359600DAA33C /* Frameworks */,
 				3419394717FD359600DAA33C /* Products */,
@@ -108,8 +109,8 @@
 		3419394717FD359600DAA33C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3419394617FD359600DAA33C /* MCPanelViewController.app */,
-				3419396717FD359600DAA33C /* MCPanelViewControllerTests.xctest */,
+				3419394617FD359600DAA33C /* MCPanelViewControllerDemo.app */,
+				3419396717FD359600DAA33C /* MCPanelViewControllerDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -125,29 +126,28 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3419394F17FD359600DAA33C /* MCPanelViewController */ = {
+		3419394F17FD359600DAA33C /* MCPanelViewControllerDemo */ = {
 			isa = PBXGroup;
 			children = (
-				3419398A17FD366800DAA33C /* CUBEN-12-Space-8-iPad3-SimonCPage.jpg */,
-				3419398817FD366000DAA33C /* CUBEN-12-Space-8-iPad3-SimonCPage@2x.jpg */,
-				3419398717FD35D700DAA33C /* MCPanelViewController */,
-				3419395817FD359600DAA33C /* MCAppDelegate.h */,
-				3419395917FD359600DAA33C /* MCAppDelegate.m */,
+				34A0D358180F995F00B25BB0 /* CUBEN-12-Space-8-iPad3-SimonCPage.jpg */,
+				34A0D359180F995F00B25BB0 /* CUBEN-12-Space-8-iPad3-SimonCPage@2x.jpg */,
+				34A0D35A180F995F00B25BB0 /* MCAppDelegate.h */,
+				34A0D35B180F995F00B25BB0 /* MCAppDelegate.m */,
 				3419395B17FD359600DAA33C /* Main.storyboard */,
 				3419398C17FD3B0A00DAA33C /* View Controllers */,
-				3419396117FD359600DAA33C /* Images.xcassets */,
+				34A0D356180F995700B25BB0 /* Images.xcassets */,
 				3419395017FD359600DAA33C /* Supporting Files */,
 			);
-			path = MCPanelViewController;
+			path = MCPanelViewControllerDemo;
 			sourceTree = "<group>";
 		};
 		3419395017FD359600DAA33C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3419395117FD359600DAA33C /* MCPanelViewController-Info.plist */,
+				3419395117FD359600DAA33C /* MCPanelViewControllerDemo-Info.plist */,
 				3419395217FD359600DAA33C /* InfoPlist.strings */,
 				3419395517FD359600DAA33C /* main.m */,
-				3419395717FD359600DAA33C /* MCPanelViewController-Prefix.pch */,
+				3419395717FD359600DAA33C /* MCPanelViewControllerDemo-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -164,23 +164,10 @@
 		3419396F17FD359600DAA33C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3419397017FD359600DAA33C /* MCPanelViewControllerTests-Info.plist */,
+				3419397017FD359600DAA33C /* MCPanelViewControllerDemoTests-Info.plist */,
 				3419397117FD359600DAA33C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		3419398717FD35D700DAA33C /* MCPanelViewController */ = {
-			isa = PBXGroup;
-			children = (
-				3419397E17FD35B300DAA33C /* MCPanelViewController.h */,
-				3419397F17FD35B300DAA33C /* MCPanelViewController.m */,
-				3419398017FD35B300DAA33C /* MCPanGestureRecognizer.h */,
-				3419398117FD35B300DAA33C /* MCPanGestureRecognizer.m */,
-				3419398417FD35CE00DAA33C /* UIImage+ImageEffects.h */,
-				3419398517FD35CE00DAA33C /* UIImage+ImageEffects.m */,
-			);
-			name = MCPanelViewController;
 			sourceTree = "<group>";
 		};
 		3419398C17FD3B0A00DAA33C /* View Controllers */ = {
@@ -194,12 +181,25 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
+		34A0D35F180F9A4A00B25BB0 /* MCPanelViewController */ = {
+			isa = PBXGroup;
+			children = (
+				34A0D360180F9A4A00B25BB0 /* MCPanelViewController.h */,
+				34A0D361180F9A4A00B25BB0 /* MCPanelViewController.m */,
+				34A0D362180F9A4A00B25BB0 /* MCPanGestureRecognizer.h */,
+				34A0D363180F9A4A00B25BB0 /* MCPanGestureRecognizer.m */,
+				34A0D364180F9A4A00B25BB0 /* UIImage+ImageEffects.h */,
+				34A0D365180F9A4A00B25BB0 /* UIImage+ImageEffects.m */,
+			);
+			path = MCPanelViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3419394517FD359600DAA33C /* MCPanelViewController */ = {
+		3419394517FD359600DAA33C /* MCPanelViewControllerDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3419397817FD359600DAA33C /* Build configuration list for PBXNativeTarget "MCPanelViewController" */;
+			buildConfigurationList = 3419397817FD359600DAA33C /* Build configuration list for PBXNativeTarget "MCPanelViewControllerDemo" */;
 			buildPhases = (
 				3419394217FD359600DAA33C /* Sources */,
 				3419394317FD359600DAA33C /* Frameworks */,
@@ -209,14 +209,14 @@
 			);
 			dependencies = (
 			);
-			name = MCPanelViewController;
+			name = MCPanelViewControllerDemo;
 			productName = MCPanelViewController;
-			productReference = 3419394617FD359600DAA33C /* MCPanelViewController.app */;
+			productReference = 3419394617FD359600DAA33C /* MCPanelViewControllerDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3419396617FD359600DAA33C /* MCPanelViewControllerTests */ = {
+		3419396617FD359600DAA33C /* MCPanelViewControllerDemoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3419397B17FD359600DAA33C /* Build configuration list for PBXNativeTarget "MCPanelViewControllerTests" */;
+			buildConfigurationList = 3419397B17FD359600DAA33C /* Build configuration list for PBXNativeTarget "MCPanelViewControllerDemoTests" */;
 			buildPhases = (
 				3419396317FD359600DAA33C /* Sources */,
 				3419396417FD359600DAA33C /* Frameworks */,
@@ -227,9 +227,9 @@
 			dependencies = (
 				3419396D17FD359600DAA33C /* PBXTargetDependency */,
 			);
-			name = MCPanelViewControllerTests;
+			name = MCPanelViewControllerDemoTests;
 			productName = MCPanelViewControllerTests;
-			productReference = 3419396717FD359600DAA33C /* MCPanelViewControllerTests.xctest */;
+			productReference = 3419396717FD359600DAA33C /* MCPanelViewControllerDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -247,7 +247,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3419394117FD359600DAA33C /* Build configuration list for PBXProject "MCPanelViewController" */;
+			buildConfigurationList = 3419394117FD359600DAA33C /* Build configuration list for PBXProject "MCPanelViewControllerDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -260,8 +260,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3419394517FD359600DAA33C /* MCPanelViewController */,
-				3419396617FD359600DAA33C /* MCPanelViewControllerTests */,
+				3419394517FD359600DAA33C /* MCPanelViewControllerDemo */,
+				3419396617FD359600DAA33C /* MCPanelViewControllerDemoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -271,10 +271,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3419398917FD366000DAA33C /* CUBEN-12-Space-8-iPad3-SimonCPage@2x.jpg in Resources */,
-				3419398B17FD366800DAA33C /* CUBEN-12-Space-8-iPad3-SimonCPage.jpg in Resources */,
-				3419396217FD359600DAA33C /* Images.xcassets in Resources */,
+				34A0D357180F995700B25BB0 /* Images.xcassets in Resources */,
+				34A0D35D180F995F00B25BB0 /* CUBEN-12-Space-8-iPad3-SimonCPage@2x.jpg in Resources */,
 				3419395417FD359600DAA33C /* InfoPlist.strings in Resources */,
+				34A0D35C180F995F00B25BB0 /* CUBEN-12-Space-8-iPad3-SimonCPage.jpg in Resources */,
 				3419395D17FD359600DAA33C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,13 +294,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3419398317FD35B300DAA33C /* MCPanGestureRecognizer.m in Sources */,
 				3419398F17FD3B1F00DAA33C /* LightPanelViewController.m in Sources */,
-				3419395A17FD359600DAA33C /* MCAppDelegate.m in Sources */,
-				3419398617FD35CE00DAA33C /* UIImage+ImageEffects.m in Sources */,
-				3419398217FD35B300DAA33C /* MCPanelViewController.m in Sources */,
+				34A0D366180F9A4A00B25BB0 /* MCPanelViewController.m in Sources */,
+				34A0D368180F9A4A00B25BB0 /* UIImage+ImageEffects.m in Sources */,
 				3419396017FD359600DAA33C /* MCViewController.m in Sources */,
+				34A0D367180F9A4A00B25BB0 /* MCPanGestureRecognizer.m in Sources */,
 				3419395617FD359600DAA33C /* main.m in Sources */,
+				34A0D35E180F995F00B25BB0 /* MCAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,7 +317,7 @@
 /* Begin PBXTargetDependency section */
 		3419396D17FD359600DAA33C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 3419394517FD359600DAA33C /* MCPanelViewController */;
+			target = 3419394517FD359600DAA33C /* MCPanelViewControllerDemo */;
 			targetProxy = 3419396C17FD359600DAA33C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -430,9 +430,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MCPanelViewController/MCPanelViewController-Prefix.pch";
-				INFOPLIST_FILE = "MCPanelViewController/MCPanelViewController-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "MCPanelViewControllerDemo/MCPanelViewControllerDemo-Prefix.pch";
+				INFOPLIST_FILE = "MCPanelViewControllerDemo/MCPanelViewControllerDemo-Info.plist";
+				PRODUCT_NAME = MCPanelViewControllerDemo;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -443,9 +443,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MCPanelViewController/MCPanelViewController-Prefix.pch";
-				INFOPLIST_FILE = "MCPanelViewController/MCPanelViewController-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "MCPanelViewControllerDemo/MCPanelViewControllerDemo-Prefix.pch";
+				INFOPLIST_FILE = "MCPanelViewControllerDemo/MCPanelViewControllerDemo-Info.plist";
+				PRODUCT_NAME = MCPanelViewControllerDemo;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -466,8 +466,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "MCPanelViewControllerTests/MCPanelViewControllerTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "MCPanelViewControllerTests/MCPanelViewControllerDemoTests-Info.plist";
+				PRODUCT_NAME = MCPanelViewControllerDemoTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -485,8 +485,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MCPanelViewController/MCPanelViewController-Prefix.pch";
-				INFOPLIST_FILE = "MCPanelViewControllerTests/MCPanelViewControllerTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "MCPanelViewControllerTests/MCPanelViewControllerDemoTests-Info.plist";
+				PRODUCT_NAME = MCPanelViewControllerDemoTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -495,7 +495,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3419394117FD359600DAA33C /* Build configuration list for PBXProject "MCPanelViewController" */ = {
+		3419394117FD359600DAA33C /* Build configuration list for PBXProject "MCPanelViewControllerDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3419397617FD359600DAA33C /* Debug */,
@@ -504,7 +504,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3419397817FD359600DAA33C /* Build configuration list for PBXNativeTarget "MCPanelViewController" */ = {
+		3419397817FD359600DAA33C /* Build configuration list for PBXNativeTarget "MCPanelViewControllerDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3419397917FD359600DAA33C /* Debug */,
@@ -513,7 +513,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3419397B17FD359600DAA33C /* Build configuration list for PBXNativeTarget "MCPanelViewControllerTests" */ = {
+		3419397B17FD359600DAA33C /* Build configuration list for PBXNativeTarget "MCPanelViewControllerDemoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3419397C17FD359600DAA33C /* Debug */,
