@@ -26,13 +26,14 @@ typedef NS_ENUM(NSInteger, MCPanelBackgroundStyle) {
 @property (strong, nonatomic) UIColor *tintColor;
 @property (assign, nonatomic) MCPanelBackgroundStyle backgroundStyle;
 @property (assign, nonatomic, getter = isMasking) BOOL masking;
-@property (nonatomic, assign) BOOL panGesturesEnabled;
+@property (assign, nonatomic, getter = isPanningEnabled) BOOL panningEnabled;
 
 - (id)initWithRootViewController:(UIViewController *)controller;
 - (void)presentInViewController:(UIViewController *)controller withDirection:(MCPanelAnimationDirection)direction;
 - (void)dismiss;
 
 - (UIScreenEdgePanGestureRecognizer *)gestureRecognizerForScreenEdgeGestureInViewController:(UIViewController *)controller withDirection:(MCPanelAnimationDirection)direction;
+- (void)removeGestureRecognizersForScreenEdgeGestureFromView:(UIView *)view;
 
 @end
 
@@ -40,5 +41,7 @@ typedef NS_ENUM(NSInteger, MCPanelBackgroundStyle) {
 
 - (MCPanelViewController *)viewControllerInPanelViewController;
 - (void)presentPanelViewController:(MCPanelViewController *)controller withDirection:(MCPanelAnimationDirection)direction;
+- (void)addGestureRecognizerToViewForScreenEdgeGestureWithPanelViewController:(MCPanelViewController *)controller withDirection:(MCPanelAnimationDirection)direction;
+- (void)removeGestureRecognizersFromViewForScreenEdgeGestureWithPanelViewController:(MCPanelViewController *)controller;
 
 @end

@@ -13,10 +13,13 @@
 
 #import <objc/runtime.h>
 
+// constants
 const static CGFloat MCPanelViewAnimationDuration = 0.3;
 const static CGFloat MCPanelViewGestureThreshold = 0.6;
 
-const static NSString *MCPanelViewGestureViewControllerKey = @"MCPanelViewGestureViewControllerKey";
+// associative references on UIScreenEdgePanGestureRecognizer to remember some information we need later
+const static NSString *MCPanelViewGesturePresentingViewControllerKey = @"MCPanelViewGesturePresentingViewControllerKey";
+const static NSString *MCPanelViewGesturePresentedViewControllerKey = @"MCPanelViewGesturePresentedViewControllerKey";
 const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGestureAnimationDirectionKey";
 
 @interface UIViewController (MCPanelViewControllerInternal)
@@ -63,11 +66,12 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
 @property (assign, nonatomic) CGFloat maxWidth;
 @property (assign, nonatomic) CGFloat maxHeight;
 
+@property (strong, nonatomic) UIView *shadowView;
+@property (strong, nonatomic) UIImageView *imageView;
 @property (strong, nonatomic) UIButton *backgroundButton;
 @property (strong, nonatomic) MCPanGestureRecognizer *panGestureRecognizer;
 
-@property (strong, nonatomic) UIView *shadowView;
-@property (strong, nonatomic) UIImageView *imageView;
+// presentedViewController
 @property (strong, nonatomic, readwrite) UIViewController *rootViewController;
 
 @end
@@ -112,17 +116,20 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
     self.shadowView.layer.shadowOffset = CGSizeZero;
 
     self.imageView = [[UIImageView alloc] init];
-    self.imageView.contentMode = UIViewContentModeLeft;
     self.imageView.clipsToBounds = YES;
     
     [self.view addSubview:self.shadowView];
     [self.view addSubview:self.imageView];
   
-    [self setPanGesturesEnabled:YES];
+    [self setPanningEnabled:YES];
 }
 
 - (void)setMasking:(BOOL)masking {
+    if (_masking == masking) {
+        return;
+    }
     _masking = masking;
+    
     if (masking) {
         self.backgroundButton.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
     }
@@ -131,20 +138,21 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
     }
 }
 
-- (void)setPanGesturesEnabled:(BOOL)panGesturesEnabled {  
-  if( panGesturesEnabled == _panGesturesEnabled )
-    return;
-  
-  _panGesturesEnabled = panGesturesEnabled;
-  
-  if( _panGesturesEnabled && !self.panGestureRecognizer ) {
-    self.panGestureRecognizer = [[MCPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    self.panGestureRecognizer.direction = MCPanGestureRecognizerDirectionHorizontal;
-    [self.rootViewController.view addGestureRecognizer:self.panGestureRecognizer];
-  } else if( !_panGesturesEnabled && self.panGestureRecognizer ) {
-    [self.rootViewController.view removeGestureRecognizer:self.panGestureRecognizer];
-    self.panGestureRecognizer = nil;
-  }
+- (void)setPanningEnabled:(BOOL)panningEnabled {
+    if (panningEnabled == _panningEnabled) {
+        return;
+    }
+    
+    _panningEnabled = panningEnabled;
+    
+    if( panningEnabled && !self.panGestureRecognizer ) {
+        self.panGestureRecognizer = [[MCPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        self.panGestureRecognizer.direction = MCPanGestureRecognizerDirectionHorizontal;
+        [self.rootViewController.view addGestureRecognizer:self.panGestureRecognizer];
+    } else if( !panningEnabled && self.panGestureRecognizer ) {
+        [self.rootViewController.view removeGestureRecognizer:self.panGestureRecognizer];
+        self.panGestureRecognizer = nil;
+    }
 }
 
 - (void)layoutSubviewsToWidth:(CGFloat)width {
@@ -258,9 +266,6 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
     }];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
-}
-
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     CGRect bounds = self.parentViewController.view.bounds;
     self.maxHeight = CGRectGetHeight(bounds);
@@ -339,7 +344,7 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
     // initialization for screen edge pan gesture
     if ([pan isKindOfClass:[UIScreenEdgePanGestureRecognizer class]] &&
         pan.state == UIGestureRecognizerStateBegan) {
-        __weak UIViewController *controller = objc_getAssociatedObject(pan, &MCPanelViewGestureViewControllerKey);
+        __weak UIViewController *controller = objc_getAssociatedObject(pan, &MCPanelViewGesturePresentingViewControllerKey);
         
         if (!controller) {
             return;
@@ -416,10 +421,25 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
     UIScreenEdgePanGestureRecognizer *pan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     pan.edges = direction == MCPanelAnimationDirectionLeft ? UIRectEdgeLeft : UIRectEdgeRight;
 
-    objc_setAssociatedObject(pan, &MCPanelViewGestureViewControllerKey, controller, OBJC_ASSOCIATION_RETAIN);
-    objc_setAssociatedObject(pan, &MCPanelViewGestureAnimationDirectionKey, @(direction), OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(pan, &MCPanelViewGesturePresentingViewControllerKey,
+                             controller, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(pan, &MCPanelViewGesturePresentedViewControllerKey,
+                             self, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(pan, &MCPanelViewGestureAnimationDirectionKey,
+                             @(direction), OBJC_ASSOCIATION_RETAIN);
 
     return pan;
+}
+
+- (void)removeGestureRecognizersForScreenEdgeGestureFromView:(UIView *)view {
+    for (UIGestureRecognizer *recognizer in view.gestureRecognizers) {
+        if ([recognizer isKindOfClass:[UIScreenEdgePanGestureRecognizer class]]) {
+            __weak UIViewController *controller = objc_getAssociatedObject(recognizer, &MCPanelViewGesturePresentedViewControllerKey);
+            if (controller == self) {
+                [view removeGestureRecognizer:recognizer];
+            }
+        }
+    }
 }
 
 @end
@@ -432,6 +452,14 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
 
 - (void)presentPanelViewController:(MCPanelViewController *)controller withDirection:(MCPanelAnimationDirection)direction {
     [controller presentInViewController:self withDirection:direction];
+}
+
+- (void)addGestureRecognizerToViewForScreenEdgeGestureWithPanelViewController:(MCPanelViewController *)controller withDirection:(MCPanelAnimationDirection)direction {
+    [self.view addGestureRecognizer:[controller gestureRecognizerForScreenEdgeGestureInViewController:self withDirection:direction]];
+}
+
+- (void)removeGestureRecognizersFromViewForScreenEdgeGestureWithPanelViewController:(MCPanelViewController *)controller {
+    [controller removeGestureRecognizersForScreenEdgeGestureFromView:self.view];
 }
 
 @end
