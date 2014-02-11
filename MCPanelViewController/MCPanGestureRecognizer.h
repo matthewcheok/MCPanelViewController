@@ -1,6 +1,6 @@
 //
 //  MCPanGestureRecognizer.h
-//  GSX
+//  MCPanelViewController
 //
 //  Created by Matthew Cheok on 2/10/13.
 //  Copyright (c) 2013 Matthew Cheok. All rights reserved.

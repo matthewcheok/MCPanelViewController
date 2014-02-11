@@ -27,6 +27,7 @@
 		34A0D366180F9A4A00B25BB0 /* MCPanelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A0D361180F9A4A00B25BB0 /* MCPanelViewController.m */; };
 		34A0D367180F9A4A00B25BB0 /* MCPanGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A0D363180F9A4A00B25BB0 /* MCPanGestureRecognizer.m */; };
 		34A0D368180F9A4A00B25BB0 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 34A0D365180F9A4A00B25BB0 /* UIImage+ImageEffects.m */; };
+		34B57C16185055EC006EEEBD /* UIView+MCAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B57C15185055EC006EEEBD /* UIView+MCAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		34A0D363180F9A4A00B25BB0 /* MCPanGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPanGestureRecognizer.m; sourceTree = "<group>"; };
 		34A0D364180F9A4A00B25BB0 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		34A0D365180F9A4A00B25BB0 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		34B57C14185055EC006EEEBD /* UIView+MCAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MCAdditions.h"; sourceTree = "<group>"; };
+		34B57C15185055EC006EEEBD /* UIView+MCAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MCAdditions.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +193,8 @@
 				34A0D363180F9A4A00B25BB0 /* MCPanGestureRecognizer.m */,
 				34A0D364180F9A4A00B25BB0 /* UIImage+ImageEffects.h */,
 				34A0D365180F9A4A00B25BB0 /* UIImage+ImageEffects.m */,
+				34B57C14185055EC006EEEBD /* UIView+MCAdditions.h */,
+				34B57C15185055EC006EEEBD /* UIView+MCAdditions.m */,
 			);
 			path = MCPanelViewController;
 			sourceTree = "<group>";
@@ -296,6 +301,7 @@
 			files = (
 				3419398F17FD3B1F00DAA33C /* LightPanelViewController.m in Sources */,
 				34A0D366180F9A4A00B25BB0 /* MCPanelViewController.m in Sources */,
+				34B57C16185055EC006EEEBD /* UIView+MCAdditions.m in Sources */,
 				34A0D368180F9A4A00B25BB0 /* UIImage+ImageEffects.m in Sources */,
 				3419396017FD359600DAA33C /* MCViewController.m in Sources */,
 				34A0D367180F9A4A00B25BB0 /* MCPanGestureRecognizer.m in Sources */,

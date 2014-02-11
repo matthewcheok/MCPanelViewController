@@ -5,7 +5,7 @@ Drop-in panel control for iOS with blurring background and screen-edge activatio
 
 
 ##Screenshot
-![Screenshot](https://raw.github.com/mehsome/MCPanelViewController/master/screenshot.png "Example of MCPanelViewController")
+![Screenshot](https://raw.github.com/matthewcheok/MCPanelViewController/master/screenshot.png "Example of MCPanelViewController")
 
 ## Installation
 
