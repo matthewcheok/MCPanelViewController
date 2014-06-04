@@ -289,16 +289,18 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
     CGFloat height = CGRectGetHeight(view.bounds);
     CGFloat dimension = MAX(width, height);
     CGRect rect = CGRectMake(0, 0, width, dimension);
-
+        
     // get snapshot image
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);
-    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:NO];
     
     // try to extend image by reflecting
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextTranslateCTM(ctx, 0, 2*height);
-    CGContextScaleCTM(ctx, 1, -1);
-    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    if (dimension > height) {
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
+        CGContextTranslateCTM(ctx, 0, 2*height);
+        CGContextScaleCTM(ctx, 1, -1);
+        [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:NO];
+    }
     
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -394,10 +396,12 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
     switch (pan.state) {
         case UIGestureRecognizerStateBegan:
         case UIGestureRecognizerStateChanged: {
-            [self layoutSubviewsToWidth:newWidth];
+            if (newWidth <= self.maxWidth) {
+                [self layoutSubviewsToWidth:newWidth];
+            }
             break;
         }
-
+            
         case UIGestureRecognizerStateEnded:
         case UIGestureRecognizerStateCancelled: {
             CGFloat threshold = MCPanelViewGestureThreshold;
