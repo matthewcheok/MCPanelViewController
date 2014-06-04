@@ -24,6 +24,10 @@ typedef NS_ENUM(NSInteger, MCPanelBackgroundStyle) {
 
 @property (strong, nonatomic, readonly) UIViewController *rootViewController;
 @property (strong, nonatomic) UIColor *tintColor;
+@property (strong, nonatomic) UIColor *maskColor;
+@property (strong, nonatomic) UIColor *shadowColor;
+@property (assign, nonatomic) CGFloat shadowOpacity;
+@property (assign, nonatomic) CGFloat shadowRadius;
 @property (assign, nonatomic) MCPanelBackgroundStyle backgroundStyle;
 @property (assign, nonatomic, getter = isMasking) BOOL masking;
 @property (assign, nonatomic, getter = isPanningEnabled) BOOL panningEnabled;
