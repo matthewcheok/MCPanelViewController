@@ -268,6 +268,34 @@ const static NSString *MCPanelViewGestureAnimationDirectionKey = @"MCPanelViewGe
     }];
 }
 
+- (void)willMoveToParentViewController:(UIViewController *)parent {
+    [super willMoveToParentViewController:parent];
+    if (parent) {
+        if ([self.delegate respondsToSelector:@selector(willPresentPanelViewController:)]) {
+            [self.delegate willPresentPanelViewController:self];
+        }
+    }
+    else {
+        if ([self.delegate respondsToSelector:@selector(willDismissPanelViewController:)]) {
+            [self.delegate willDismissPanelViewController:self];
+        }
+    }
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parent {
+    [super didMoveToParentViewController:parent];
+    if (parent) {
+        if ([self.delegate respondsToSelector:@selector(didPresentPanelViewController:)]) {
+            [self.delegate didPresentPanelViewController:self];
+        }
+    }
+    else {
+        if ([self.delegate respondsToSelector:@selector(didDismissPanelViewController:)]) {
+            [self.delegate didDismissPanelViewController:self];
+        }
+    }
+}
+
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     CGRect bounds = self.parentViewController.view.bounds;
     self.maxHeight = CGRectGetHeight(bounds);

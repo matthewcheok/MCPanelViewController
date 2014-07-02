@@ -20,6 +20,15 @@ typedef NS_ENUM(NSInteger, MCPanelBackgroundStyle) {
     MCPanelBackgroundStyleTinted
 };
 
+@class MCPanelViewController;
+@protocol MCPanelViewControllerDelegate <NSObject>
+@optional
+- (void)willPresentPanelViewController:(MCPanelViewController *)controller;
+- (void)didPresentPanelViewController:(MCPanelViewController *)controller;
+- (void)willDismissPanelViewController:(MCPanelViewController *)controller;
+- (void)didDismissPanelViewController:(MCPanelViewController *)controller;
+@end
+
 @interface MCPanelViewController : UIViewController
 
 @property (strong, nonatomic, readonly) UIViewController *rootViewController;
@@ -31,6 +40,7 @@ typedef NS_ENUM(NSInteger, MCPanelBackgroundStyle) {
 @property (assign, nonatomic) MCPanelBackgroundStyle backgroundStyle;
 @property (assign, nonatomic, getter = isMasking) BOOL masking;
 @property (assign, nonatomic, getter = isPanningEnabled) BOOL panningEnabled;
+@property (weak, nonatomic) id<MCPanelViewControllerDelegate> delegate;
 
 - (id)initWithRootViewController:(UIViewController *)controller;
 - (void)presentInViewController:(UIViewController *)controller withDirection:(MCPanelAnimationDirection)direction;
