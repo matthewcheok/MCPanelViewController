@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'MCPanelViewController'
-  s.version  = '0.2.1'
+  s.version  = '0.3'
   s.platform = :ios, '7.0'
   s.license  = { :type => 'MIT', :file => 'LICENSE' }
   s.summary  = 'Drop-in panel control for iOS with blurring background and screen-edge activation gestures.'

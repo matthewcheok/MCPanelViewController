@@ -43,6 +43,10 @@ or using the convenience method on `UIViewController`:
 
 You may also use `MCPanelAnimationDirectionLeft`. Present the controller in a full-screen view controller, such as a top-level navigation controller.
 
+Dismiss from the presented view controller like this:
+
+    [self.panelViewController dismiss];
+
 ## Optional Configuration
 
 Turn off the background masking effect:
