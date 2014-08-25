@@ -1,0 +1,14 @@
+PODS:
+  - MCPanelViewController (0.2.1)
+
+DEPENDENCIES:
+  - MCPanelViewController (from `../`)
+
+EXTERNAL SOURCES:
+  MCPanelViewController:
+    :path: ../
+
+SPEC CHECKSUMS:
+  MCPanelViewController: b6040831bd42a27ea4b6cff1c4c40cab3ec9fc79
+
+COCOAPODS: 0.33.1

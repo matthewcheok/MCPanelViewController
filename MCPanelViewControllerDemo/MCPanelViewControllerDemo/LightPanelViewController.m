@@ -7,21 +7,13 @@
 //
 
 #import "LightPanelViewController.h"
+#import <MCPanelViewController.h>
 
 @interface LightPanelViewController ()
 
 @end
 
 @implementation LightPanelViewController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -44,6 +36,10 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     cell.backgroundColor = [UIColor colorWithWhite:1 alpha:0.3];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    [self.panelViewController dismiss];
 }
 
 @end

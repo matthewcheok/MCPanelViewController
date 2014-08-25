@@ -1,14 +1,14 @@
 //
-//  MCAppDelegate.m
-//  MCPanelViewController
+//  AppDelegate.m
+//  MCPanelViewControllerDemo
 //
-//  Created by Matthew Cheok on 3/10/13.
-//  Copyright (c) 2013 Matthew Cheok. All rights reserved.
+//  Created by Matthew Cheok on 25/8/14.
+//  Copyright (c) 2014 Matthew Cheok. All rights reserved.
 //
 
-#import "MCAppDelegate.h"
+#import "AppDelegate.h"
 
-@implementation MCAppDelegate
+@implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

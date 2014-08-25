@@ -1,18 +1,18 @@
 //
-//  MCPanelViewControllerTests.m
-//  MCPanelViewControllerTests
+//  MCPanelViewControllerDemoTests.m
+//  MCPanelViewControllerDemoTests
 //
-//  Created by Matthew Cheok on 3/10/13.
-//  Copyright (c) 2013 Matthew Cheok. All rights reserved.
+//  Created by Matthew Cheok on 25/8/14.
+//  Copyright (c) 2014 Matthew Cheok. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface MCPanelViewControllerTests : XCTestCase
+@interface MCPanelViewControllerDemoTests : XCTestCase
 
 @end
 
-@implementation MCPanelViewControllerTests
+@implementation MCPanelViewControllerDemoTests
 
 - (void)setUp
 {

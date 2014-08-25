@@ -53,6 +53,8 @@ typedef NS_ENUM(NSInteger, MCPanelBackgroundStyle) {
 
 @interface UIViewController (MCPanelViewController)
 
+@property (nonatomic, strong, readonly) MCPanelViewController *panelViewController;
+
 - (MCPanelViewController *)viewControllerInPanelViewController;
 - (void)presentPanelViewController:(MCPanelViewController *)controller withDirection:(MCPanelAnimationDirection)direction;
 - (void)addGestureRecognizerToViewForScreenEdgeGestureWithPanelViewController:(MCPanelViewController *)controller withDirection:(MCPanelAnimationDirection)direction;
